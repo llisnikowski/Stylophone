@@ -5,23 +5,26 @@ constexpr int notes[] = {261, 277, 293, 311, 329, 343, 369, 392, 415, 440,
 						830, 880};
 
 constexpr int speakerPin = 3;
+constexpr int firstKey = 4;
+constexpr int lastKey = 13;
+
 
 void setup() {
 	Serial.begin(9600);
 	pinMode(speakerPin, OUTPUT);
-	for(int i = 4; i <= 13; i++){
+	for(int i = firstKey; i <= lastKey; i++){
 		pinMode(i, INPUT_PULLUP);
 	}
 }
 
 void loop() {
 
-	for(int i = 4; i <= 13; i++){
+	for(int i = firstKey; i <= lastKey; i++){
 		if(digitalRead(i) == LOW){
-			tone(speakerPin, notes[i - 4]);
+			tone(speakerPin, notes[i - firstKey]);
 			break;
 		}
-		if(i >= 13){
+		if(i >= lastKey){
 			noTone(speakerPin);
 		}
 	}
